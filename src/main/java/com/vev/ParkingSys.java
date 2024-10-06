@@ -1,6 +1,7 @@
 package com.vev;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class ParkingSys {
@@ -10,19 +11,25 @@ public class ParkingSys {
     private static double overnightPrice = 50.00;
     private LocalDate entranceDate;
     private LocalTime entranceTime;
+    private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public ParkingSys(boolean isVip) {
         this.isVip = isVip;
     }
 
     public String enter() {
-        LocalTime currentTime = LocalTime.now();
+        return enter(LocalDate.now(), LocalTime.now());
+    }
+
+    public String enter(LocalDate currentDate, LocalTime currentTime) {
         verifyRange(currentTime);
 
         this.entranceTime = currentTime;
         this.entranceDate = LocalDate.now();
 
-        return String.format("Entrada realizada em %s às %s", entranceDate, entranceTime);
+        return String.format("Entrada realizada em %s às %s", entranceDate.format(dateFormatter),
+                entranceTime.format(timeFormatter));
     }
 
     private double price(LocalDate exitDate, LocalTime exitTime) {
@@ -54,8 +61,10 @@ public class ParkingSys {
     }
 
     public String leave() {
-        LocalDate exitDate = LocalDate.now();
-        LocalTime exitTime = LocalTime.now();
+        return leave(LocalDate.now(), LocalTime.now());
+    }
+
+    public String leave(LocalDate exitDate, LocalTime exitTime) {
 
         // verifica se entrou antes de sair
         if (entranceDate.isAfter(exitDate) || (entranceDate.equals(exitDate) && entranceTime.isAfter(exitTime))) {
@@ -66,7 +75,8 @@ public class ParkingSys {
 
         double price = price(exitDate, exitTime);
 
-        return String.format("Saída realizada em %s às %s.%n Valor a pagar: R$ %.2f", entranceDate, entranceTime,
+        return String.format("Saída realizada em %s às %s.%n Valor a pagar: R$ %.2f", exitDate.format(dateFormatter),
+                exitTime.format(timeFormatter),
                 price);
     }
 
