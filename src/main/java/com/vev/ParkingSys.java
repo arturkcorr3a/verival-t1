@@ -26,7 +26,7 @@ public class ParkingSys {
         verifyRange(currentTime);
 
         this.entranceTime = currentTime;
-        this.entranceDate = LocalDate.now();
+        this.entranceDate = currentDate;
 
         return String.format("Entrada realizada em %s às %s", entranceDate.format(dateFormatter),
                 entranceTime.format(timeFormatter));
@@ -34,30 +34,32 @@ public class ParkingSys {
 
     private double price(LocalDate exitDate, LocalTime exitTime) {
         verifyRange(exitTime);
-        double valor;
 
-        // 15min cortesia
-        if (entranceDate.equals(exitDate) && entranceTime.plusMinutes(15).isAfter(exitTime)) {
+        LocalDateTime entranceDateTime = LocalDateTime.of(entranceDate, entranceTime);
+        LocalDateTime exitDateTime = LocalDateTime.of(exitDate, exitTime);
+
+        // 15 minutos de cortesia
+        if (Duration.between(entranceDateTime, exitDateTime).toMinutes() <= 15) {
             return 0.0;
         }
 
-        // Verifica pernoite
-        valor = overnightCalculator(exitDate, exitTime);
-        if ((valor > 0.0)) {
-            return (isVip) ? valor * 0.5 : valor;
+        // Verifica se é pernoite
+        double valor = overnightCalculator(exitDate, exitTime);
+        if (valor > 0.0) {
+            return applyVipDiscount(valor);
         }
 
-        // Verifica se é menos de 1h
-        if (entranceTime.plusHours(1).isAfter(exitTime)) {
-            return (isVip) ? oneHourPrice * 0.5 : oneHourPrice;
+        // Calcula permanência total em horas, considerando data e hora
+        long totalHours = ChronoUnit.HOURS.between(entranceDateTime, exitDateTime);
+
+        // Verifica se é menos de 1 hora
+        if (totalHours < 1) {
+            return applyVipDiscount(oneHourPrice);
         }
 
-        // Calcula valor
-        long durationInSeconds = Duration.between(entranceTime, exitTime).getSeconds();
-        long durationInHours = (int) Math.ceil(durationInSeconds / 3600.0);
-        valor = oneHourPrice + (durationInHours - 1) * additionalHourPrice;
-        return (isVip) ? valor * 0.5 : valor;
-
+        // Calcula valor total para horas adicionais
+        valor = oneHourPrice + (totalHours - 1) * additionalHourPrice;
+        return applyVipDiscount(valor);
     }
 
     public String leave() {
@@ -65,8 +67,7 @@ public class ParkingSys {
     }
 
     public String leave(LocalDate exitDate, LocalTime exitTime) {
-
-        // verifica se entrou antes de sair
+        // Verifica se entrou antes de sair
         if (entranceDate.isAfter(exitDate) || (entranceDate.equals(exitDate) && entranceTime.isAfter(exitTime))) {
             throw new RuntimeException("Entrance is after exit");
         }
@@ -75,7 +76,7 @@ public class ParkingSys {
 
         double price = price(exitDate, exitTime);
 
-        return String.format("Saída realizada em %s às %s.%n Valor a pagar: R$ %.2f", exitDate.format(dateFormatter),
+        return String.format("Saída realizada em %s às %s.%nValor a pagar: R$ %.2f", exitDate.format(dateFormatter),
                 exitTime.format(timeFormatter),
                 price);
     }
@@ -85,7 +86,6 @@ public class ParkingSys {
             if (entranceTime.isBefore(LocalTime.of(2, 0)) && exitTime.isAfter(LocalTime.of(8, 0))) {
                 return overnightPrice;
             }
-
             return 0.0;
         }
 
@@ -96,7 +96,6 @@ public class ParkingSys {
                 if (exitTime.isAfter(LocalTime.of(8, 0))) {
                     return overnightPrice * (daysBetween + 1);
                 }
-
                 return overnightPrice * daysBetween;
             }
 
@@ -105,7 +104,6 @@ public class ParkingSys {
             }
 
             return overnightPrice * (daysBetween - 1);
-
         }
 
         throw new IllegalArgumentException("Entrance date is after exit date");
@@ -117,4 +115,7 @@ public class ParkingSys {
         }
     }
 
+    private double applyVipDiscount(double valor) {
+        return isVip ? valor * 0.5 : valor;
+    }
 }
