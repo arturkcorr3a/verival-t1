@@ -53,7 +53,7 @@ public class ParkingSys {
         long totalHours = ChronoUnit.HOURS.between(entranceDateTime, exitDateTime);
 
         // Verifica se é menos de 1 hora
-        if (totalHours < 1) {
+        if (totalHours <= 1) {
             return applyVipDiscount(oneHourPrice);
         }
 
