@@ -5,14 +5,14 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class ParkingSys {
-    private boolean isVip;
-    private static double oneHourPrice = 5.90;
-    private static double additionalHourPrice = 2.50;
-    private static double overnightPrice = 50.00;
+    private final boolean isVip;
+    private static final double oneHourPrice = 5.90;
+    private static final double additionalHourPrice = 2.50;
+    private static final double overnightPrice = 50.00;
     private LocalDate entranceDate;
     private LocalTime entranceTime;
-    private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-    private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public ParkingSys(boolean isVip) {
         this.isVip = isVip;
