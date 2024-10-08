@@ -302,6 +302,7 @@ public class ParkingSysTest {
         assertTrue(resultado.contains("Valor a pagar: R$ 11,70"));
     }
 
+
     @Test
     public void testUmPernoiteDoisDias() {
         ParkingSys parking = new ParkingSys(false);
@@ -341,7 +342,7 @@ public class ParkingSysTest {
         parking.enter(entranceDate, entranceTime);
         String resultado = parking.leave(exitDate, exitTime);
 
-        assertTrue(resultado.contains("Valor a pagar: R$ 100,00"));
+        assertTrue(resultado.contains("Valor a pagar: R$ 50,00"));
     }
 
     @Test
@@ -355,7 +356,7 @@ public class ParkingSysTest {
         parking.enter(entranceDate, entranceTime);
         String resultado = parking.leave(exitDate, exitTime);
 
-        assertTrue(resultado.contains("Valor a pagar: R$ 50,00"));
+        assertTrue(resultado.contains("Valor a pagar: R$ 25,00"));
     }
 
     @Test
@@ -369,7 +370,7 @@ public class ParkingSysTest {
         parking.enter(entranceDate, entranceTime);
         String resultado = parking.leave(exitDate, exitTime);
 
-        assertTrue(resultado.contains("Valor a pagar: R$ 150,00"));
+        assertTrue(resultado.contains("Valor a pagar: R$ 100,00"));
     }
 
     @Test
@@ -383,7 +384,7 @@ public class ParkingSysTest {
         parking.enter(entranceDate, entranceTime);
         String resultado = parking.leave(exitDate, exitTime);
 
-        assertTrue(resultado.contains("Valor a pagar: R$ 75,00"));
+        assertTrue(resultado.contains("Valor a pagar: R$ 50,00"));
     }
 
     //testes de exceções

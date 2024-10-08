@@ -122,7 +122,7 @@ public class ParkingSys {
 
             if (entranceTime.isBefore(LocalTime.of(2, 0))) {
                 if (exitTime.isAfter(LocalTime.of(8, 0))) {
-                    return overnightPrice * (daysBetween + 1 );
+                    return overnightPrice * (daysBetween  );
                 }
             }
             if (exitTime.isAfter(LocalTime.of(8, 0))) {
