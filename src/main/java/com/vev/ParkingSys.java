@@ -39,7 +39,7 @@ public class ParkingSys {
         LocalDateTime exitDateTime = LocalDateTime.of(exitDate, exitTime);
 
         // 15 minutos de cortesia
-        if (Duration.between(entranceDateTime, exitDateTime).toMinutes() <= 15) {
+        if (Duration.between(entranceDateTime, exitDateTime).getSeconds() <= 900) { // 900 segundos = 15 minutos
             return 0.0;
         }
 
@@ -50,15 +50,18 @@ public class ParkingSys {
         }
 
         // Calcula permanência total em horas, considerando data e hora
-        long totalHours = ChronoUnit.HOURS.between(entranceDateTime, exitDateTime);
+        long totalSeconds = ChronoUnit.SECONDS.between(entranceDateTime, exitDateTime);
 
         // Verifica se é menos de 1 hora
-        if (totalHours <= 1) {
+        if (Duration.between(entranceDateTime, exitDateTime).getSeconds() <= 3600) {
             return applyVipDiscount(oneHourPrice);
         }
 
+        long additionalSeconds = totalSeconds - 3600;
+        double additionalHours = Math.ceil((double) additionalSeconds / 3600.0);
+
         // Calcula valor total para horas adicionais
-        valor = oneHourPrice + (totalHours - 1) * additionalHourPrice;
+        valor = oneHourPrice + (additionalHours * additionalHourPrice);
         return applyVipDiscount(valor);
     }
 
@@ -69,7 +72,7 @@ public class ParkingSys {
     public String leave(LocalDate exitDate, LocalTime exitTime) {
         // Verifica se entrou antes de sair
         if (entranceDate.isAfter(exitDate) || (entranceDate.equals(exitDate) && entranceTime.isAfter(exitTime))) {
-            throw new RuntimeException("Entrance is after exit");
+            throw new IllegalArgumentException("Entrance date is after exit date"); // Alterado para IllegalArgumentException
         }
 
         verifyRange(exitTime);
@@ -90,7 +93,7 @@ public class ParkingSys {
         }
 
         if (exitDate.isAfter(entranceDate)) {
-            long daysBetween = ChronoUnit.DAYS.between(entranceDate, exitDate);
+            double daysBetween = ChronoUnit.DAYS.between(entranceDate, exitDate);
 
             if (entranceTime.isBefore(LocalTime.of(2, 0))) {
                 if (exitTime.isAfter(LocalTime.of(8, 0))) {
@@ -109,11 +112,11 @@ public class ParkingSys {
         throw new IllegalArgumentException("Entrance date is after exit date");
     }
 
-    public void verifyRange(LocalTime time) {
-        if (time.isAfter(LocalTime.of(2, 0)) && time.isBefore(LocalTime.of(8, 0))) {
-            throw new RuntimeException("O estacionamento está fechado neste horário");
+        public void verifyRange(LocalTime time) {
+            if (time.isAfter(LocalTime.of(2, 0)) && time.isBefore(LocalTime.of(8, 0))) {
+                throw new IllegalArgumentException("O estacionamento está fechado neste horário");
+            }
         }
-    }
 
     private double applyVipDiscount(double valor) {
         return isVip ? valor * 0.5 : valor;
