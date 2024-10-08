@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.vev.ParkingSysTest" time="0.241" tests="32" errors="0" skipped="0" failures="2">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.vev.ParkingSysTest" time="1.219" tests="30" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.class.path" value="C:\Users\artur\OneDrive - PUCRS - BR\verival\trab-01\verival-t1\target\test-classes;C:\Users\artur\OneDrive - PUCRS - BR\verival\trab-01\verival-t1\target\classes;C:\Users\artur\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\artur\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\artur\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\artur\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\artur\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.0\junit-jupiter-engine-5.11.0.jar;C:\Users\artur\.m2\repository\org\junit\platform\junit-platform-engine\1.11.0\junit-platform-engine-1.11.0.jar;"/>
+    <property name="java.class.path" value="C:\Users\artur\OneDrive - PUCRS - BR\verival\trab-01\verival-t1\target\test-classes;C:\Users\artur\OneDrive - PUCRS - BR\verival\trab-01\verival-t1\target\classes;C:\Users\artur\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\artur\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\artur\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\artur\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\artur\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.0\junit-jupiter-engine-5.11.0.jar;C:\Users\artur\.m2\repository\org\junit\platform\junit-platform-engine\1.11.0\junit-platform-engine-1.11.0.jar;C:\Users\artur\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.0\junit-jupiter-params-5.11.0.jar;"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
@@ -15,9 +15,9 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="BR"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
-    <property name="sun.java.command" value="C:\Users\artur\AppData\Local\Temp\surefire9318822135465727360\surefirebooter-20241008172424356_3.jar C:\Users\artur\AppData\Local\Temp\surefire9318822135465727360 2024-10-08T17-24-24_133-jvmRun1 surefire-20241008172424356_1tmp surefire_0-20241008172424356_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\artur\AppData\Local\Temp\surefire7563892645358502876\surefirebooter-20241008194729405_3.jar C:\Users\artur\AppData\Local\Temp\surefire7563892645358502876 2024-10-08T19-47-29_022-jvmRun1 surefire-20241008194729405_1tmp surefire_0-20241008194729405_2tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="C:\Users\artur\OneDrive - PUCRS - BR\verival\trab-01\verival-t1\target\test-classes;C:\Users\artur\OneDrive - PUCRS - BR\verival\trab-01\verival-t1\target\classes;C:\Users\artur\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\artur\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\artur\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\artur\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\artur\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.0\junit-jupiter-engine-5.11.0.jar;C:\Users\artur\.m2\repository\org\junit\platform\junit-platform-engine\1.11.0\junit-platform-engine-1.11.0.jar;"/>
+    <property name="surefire.test.class.path" value="C:\Users\artur\OneDrive - PUCRS - BR\verival\trab-01\verival-t1\target\test-classes;C:\Users\artur\OneDrive - PUCRS - BR\verival\trab-01\verival-t1\target\classes;C:\Users\artur\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\artur\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\artur\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\artur\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\artur\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.0\junit-jupiter-engine-5.11.0.jar;C:\Users\artur\.m2\repository\org\junit\platform\junit-platform-engine\1.11.0\junit-platform-engine-1.11.0.jar;C:\Users\artur\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.0\junit-jupiter-params-5.11.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\artur"/>
     <property name="user.language" value="pt"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\artur\AppData\Local\Temp\surefire9318822135465727360\surefirebooter-20241008172424356_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\artur\AppData\Local\Temp\surefire7563892645358502876\surefirebooter-20241008194729405_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.2+13-LTS-58"/>
@@ -58,68 +58,34 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testPermanenciaDeUmaHoraEUmMinuto" classname="com.vev.ParkingSysTest" time="0.06"/>
-  <testcase name="testPermanenciaDe15MinutosE1Segundo" classname="com.vev.ParkingSysTest" time="0.013">
-    <failure message="expected: &lt;Saída realizada em 08/10/2024 às 10:15:01.&#10;Valor a pagar: R$ 5,90&gt; but was: &lt;Saída realizada em 08/10/2024 às 10:15:01.&#10;Valor a pagar: R$ 5,90&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: 
-expected: <Saída realizada em 08/10/2024 às 10:15:01.
-Valor a pagar: R$ 5,90> but was: <Saída realizada em 08/10/2024 às 10:15:01.
-Valor a pagar: R$ 5,90>
-	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
-	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
-	at com.vev.ParkingSysTest.testPermanenciaDe15MinutosE1Segundo(ParkingSysTest.java:126)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-]]></failure>
-  </testcase>
-  <testcase name="testUmPernoiteDoisDiasVIP" classname="com.vev.ParkingSysTest" time="0.003"/>
-  <testcase name="testHorarioFechado" classname="com.vev.ParkingSysTest" time="0.004"/>
-  <testcase name="testEntradaESaidaNoMesmoMinutoVIP" classname="com.vev.ParkingSysTest" time="0.002"/>
-  <testcase name="testFalsePernoite" classname="com.vev.ParkingSysTest" time="0.003"/>
-  <testcase name="testEntradaAntesDaMeiaNoiteSaidaDepois" classname="com.vev.ParkingSysTest" time="0.002"/>
-  <testcase name="testPermanenciaDeUmaHoraEUmMinutoVIP" classname="com.vev.ParkingSysTest" time="0.002"/>
-  <testcase name="testDoisPernoitesDoisDias" classname="com.vev.ParkingSysTest" time="0.002"/>
+  <testcase name="testPermanenciaDe15MinutosE1Segundo" classname="com.vev.ParkingSysTest" time="0.144"/>
+  <testcase name="testUmPernoiteDoisDiasVIP" classname="com.vev.ParkingSysTest" time="0.028"/>
+  <testcase name="testHorarioFechado" classname="com.vev.ParkingSysTest" time="0.016"/>
+  <testcase name="testValoresEstacionamento(boolean, String, String, String)[1]" classname="com.vev.ParkingSysTest" time="0.336"/>
+  <testcase name="testValoresEstacionamento(boolean, String, String, String)[2]" classname="com.vev.ParkingSysTest" time="0.003"/>
+  <testcase name="testValoresEstacionamento(boolean, String, String, String)[3]" classname="com.vev.ParkingSysTest" time="0.004"/>
+  <testcase name="testValoresEstacionamento(boolean, String, String, String)[4]" classname="com.vev.ParkingSysTest" time="0.005"/>
+  <testcase name="testEntradaESaidaNoMesmoMinutoVIP" classname="com.vev.ParkingSysTest" time="0.006"/>
+  <testcase name="testEntradaAntesDaMeiaNoiteSaidaDepois" classname="com.vev.ParkingSysTest" time="0.004"/>
   <testcase name="testPermanenciaExataDe15MinutosVIP" classname="com.vev.ParkingSysTest" time="0.003"/>
-  <testcase name="testUmPernoiteDoisDias" classname="com.vev.ParkingSysTest" time="0.001"/>
+  <testcase name="testUmPernoiteDoisDias" classname="com.vev.ParkingSysTest" time="0.005"/>
   <testcase name="testPermanenciaDeUmaHoraUmSegundoVIP" classname="com.vev.ParkingSysTest" time="0.003"/>
-  <testcase name="testSaidaAntesDaEntradaVIP" classname="com.vev.ParkingSysTest" time="0.003"/>
-  <testcase name="testPermanenciaDeMultiplasHorasVIP" classname="com.vev.ParkingSysTest" time="0.002"/>
-  <testcase name="testDoisPernoitesDoisDiaVIP" classname="com.vev.ParkingSysTest" time="0.002"/>
-  <testcase name="testEntradaSaidaDiasDiferentesPermanenciaCurtaVIP" classname="com.vev.ParkingSysTest" time="0.002"/>
-  <testcase name="testPermanenciaDe16MinutosVIP" classname="com.vev.ParkingSysTest" time="0.001"/>
-  <testcase name="testPermanenciaDeMultiplasHoras" classname="com.vev.ParkingSysTest" time="0.002"/>
-  <testcase name="testEntradaAntesDaMeiaNoiteSaidaDepoisVIP" classname="com.vev.ParkingSysTest" time="0.001"/>
-  <testcase name="testHorarioFechadoVIP" classname="com.vev.ParkingSysTest" time="0.002"/>
-  <testcase name="testEntradaSaidaDiasDiferentesPermanenciaCurta" classname="com.vev.ParkingSysTest" time="0.001"/>
-  <testcase name="testPermanenciaDe15MinutosE1SegundoVIP" classname="com.vev.ParkingSysTest" time="0.013">
-    <failure message="expected: &lt;Saída realizada em 08/10/2024 às 10:15:01.&#10;Valor a pagar: R$ 2,95&gt; but was: &lt;Saída realizada em 08/10/2024 às 10:15:01.&#10;Valor a pagar: R$ 2,95&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: 
-expected: <Saída realizada em 08/10/2024 às 10:15:01.
-Valor a pagar: R$ 2,95> but was: <Saída realizada em 08/10/2024 às 10:15:01.
-Valor a pagar: R$ 2,95>
-	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
-	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
-	at com.vev.ParkingSysTest.testPermanenciaDe15MinutosE1SegundoVIP(ParkingSysTest.java:139)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-]]></failure>
-  </testcase>
-  <testcase name="testPermanenciaDe16Minutos" classname="com.vev.ParkingSysTest" time="0.002"/>
-  <testcase name="testDoisPernoitesDoisDia" classname="com.vev.ParkingSysTest" time="0.002"/>
-  <testcase name="testSaidaAntesDaEntrada" classname="com.vev.ParkingSysTest" time="0.002"/>
-  <testcase name="testPermanenciaDeUmaHoraUmSegundo" classname="com.vev.ParkingSysTest" time="0.001"/>
-  <testcase name="testPermanenciaExataDe15Minutos" classname="com.vev.ParkingSysTest" time="0.002"/>
+  <testcase name="testSaidaAntesDaEntradaVIP" classname="com.vev.ParkingSysTest" time="0.008"/>
+  <testcase name="testPermanenciaDeMultiplasHorasVIP" classname="com.vev.ParkingSysTest" time="0.004"/>
+  <testcase name="testDoisPernoitesDoisDiaVIP" classname="com.vev.ParkingSysTest" time="0.01"/>
+  <testcase name="testEntradaSaidaDiasDiferentesPermanenciaCurtaVIP" classname="com.vev.ParkingSysTest" time="0.003"/>
+  <testcase name="testPermanenciaDeMultiplasHoras" classname="com.vev.ParkingSysTest" time="0.003"/>
+  <testcase name="testEntradaAntesDaMeiaNoiteSaidaDepoisVIP" classname="com.vev.ParkingSysTest" time="0.003"/>
+  <testcase name="testHorarioFechadoVIP" classname="com.vev.ParkingSysTest" time="0.009"/>
+  <testcase name="testEntradaSaidaDiasDiferentesPermanenciaCurta" classname="com.vev.ParkingSysTest" time="0.015"/>
+  <testcase name="testPermanenciaDe15MinutosE1SegundoVIP" classname="com.vev.ParkingSysTest" time="0.005"/>
+  <testcase name="testFalsaPernoite" classname="com.vev.ParkingSysTest" time="0.005"/>
+  <testcase name="testDoisPernoitesDoisDia" classname="com.vev.ParkingSysTest" time="0.007"/>
+  <testcase name="testFalsaPernoiteVIP" classname="com.vev.ParkingSysTest" time="0.003"/>
+  <testcase name="testSaidaAntesDaEntrada" classname="com.vev.ParkingSysTest" time="0.007"/>
+  <testcase name="testPermanenciaDeUmaHoraUmSegundo" classname="com.vev.ParkingSysTest" time="0.006"/>
+  <testcase name="testPermanenciaExataDe15Minutos" classname="com.vev.ParkingSysTest" time="0.006"/>
   <testcase name="testPermanenciaExataDeUmaHora" classname="com.vev.ParkingSysTest" time="0.002"/>
   <testcase name="testEntradaESaidaNoMesmoMinuto" classname="com.vev.ParkingSysTest" time="0.002"/>
-  <testcase name="testFalsePernoiteVIP" classname="com.vev.ParkingSysTest" time="0.002"/>
-  <testcase name="testDoisPernoitesDoisDiasVIP" classname="com.vev.ParkingSysTest" time="0.002"/>
-  <testcase name="testPermanenciaExataDeUmaHoraVIP" classname="com.vev.ParkingSysTest" time="0.001"/>
+  <testcase name="testPermanenciaExataDeUmaHoraVIP" classname="com.vev.ParkingSysTest" time="0.004"/>
 </testsuite>

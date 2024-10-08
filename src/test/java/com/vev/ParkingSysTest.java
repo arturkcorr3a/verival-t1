@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class ParkingSysTest {
     // testes de caso limite
@@ -267,6 +269,26 @@ public class ParkingSysTest {
     }
 
     // testes cálculos de valor
+
+    // ID 1, 2, 3, 4
+    @ParameterizedTest
+    @CsvSource({
+            "true, 10:00, 10:10, R$ 0,00",
+            "false, 10:00, 10:10, R$ 0,00",
+            "true, 10:00, 10:45, R$ 2,95",
+            "false, 10:00, 10:45, R$ 5,90"
+    })
+    public void testValoresEstacionamento(boolean isVip, String entrada, String saida, String valorEsperado) {
+        ParkingSys parking = new ParkingSys(isVip);
+        LocalDate date = LocalDate.now();
+        LocalTime entranceTime = LocalTime.parse(entrada);
+        LocalTime exitTime = LocalTime.parse(saida);
+
+        parking.enter(date, entranceTime);
+        String resultado = parking.leave(date, exitTime);
+
+        assertTrue(resultado.contains("Valor a pagar: " + valorEsperado));
+    }
 
     // ID 5
     @Test
