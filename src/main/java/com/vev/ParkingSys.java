@@ -84,11 +84,36 @@ public class ParkingSys {
                 price);
     }
 
+//    private double overnightCalculator(LocalDate exitDate, LocalTime exitTime) {
+//        if (entranceDate.equals(exitDate)) {
+//            if (entranceTime.isBefore(LocalTime.of(2, 0)) && exitTime.isAfter(LocalTime.of(8, 0))) {
+//                return overnightPrice;
+//            }
+//            return 0.0;
+//        }
+//
+//        if (exitDate.isAfter(entranceDate)) {
+//            double daysBetween = ChronoUnit.DAYS.between(entranceDate, exitDate);
+//
+//            if (entranceTime.isBefore(LocalTime.of(2, 0))) {
+//                if (exitTime.isAfter(LocalTime.of(8, 0))) {
+//                    return overnightPrice * (daysBetween + 1);
+//                }
+//                return overnightPrice * daysBetween;
+//            }
+//
+//            if (exitTime.isAfter(LocalTime.of(8, 0))) {
+//                return overnightPrice * daysBetween;
+//            }
+//
+//            return overnightPrice * (daysBetween - 1);
+//        }
+//
+//        throw new IllegalArgumentException("Entrance date is after exit date");
+//    }
+
     private double overnightCalculator(LocalDate exitDate, LocalTime exitTime) {
         if (entranceDate.equals(exitDate)) {
-            if (entranceTime.isBefore(LocalTime.of(2, 0)) && exitTime.isAfter(LocalTime.of(8, 0))) {
-                return overnightPrice;
-            }
             return 0.0;
         }
 
@@ -97,16 +122,15 @@ public class ParkingSys {
 
             if (entranceTime.isBefore(LocalTime.of(2, 0))) {
                 if (exitTime.isAfter(LocalTime.of(8, 0))) {
-                    return overnightPrice * (daysBetween + 1);
+                    return overnightPrice * (daysBetween + 1 );
                 }
-                return overnightPrice * daysBetween;
             }
-
             if (exitTime.isAfter(LocalTime.of(8, 0))) {
-                return overnightPrice * daysBetween;
+                return overnightPrice * (daysBetween);
             }
-
-            return overnightPrice * (daysBetween - 1);
+        }
+        if (exitDate.isAfter(entranceDate)) {
+            return 0;
         }
 
         throw new IllegalArgumentException("Entrance date is after exit date");
