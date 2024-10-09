@@ -72,7 +72,8 @@ public class ParkingSys {
     public String leave(LocalDate exitDate, LocalTime exitTime) {
         // Verifica se entrou antes de sair
         if (entranceDate.isAfter(exitDate) || (entranceDate.equals(exitDate) && entranceTime.isAfter(exitTime))) {
-            throw new IllegalArgumentException("Entrance date is after exit date"); // Alterado para IllegalArgumentException
+            throw new IllegalArgumentException("Entrance date is after exit date"); // Alterado para
+                                                                                    // IllegalArgumentException
         }
 
         verifyRange(exitTime);
@@ -84,33 +85,34 @@ public class ParkingSys {
                 price);
     }
 
-//    private double overnightCalculator(LocalDate exitDate, LocalTime exitTime) {
-//        if (entranceDate.equals(exitDate)) {
-//            if (entranceTime.isBefore(LocalTime.of(2, 0)) && exitTime.isAfter(LocalTime.of(8, 0))) {
-//                return overnightPrice;
-//            }
-//            return 0.0;
-//        }
-//
-//        if (exitDate.isAfter(entranceDate)) {
-//            double daysBetween = ChronoUnit.DAYS.between(entranceDate, exitDate);
-//
-//            if (entranceTime.isBefore(LocalTime.of(2, 0))) {
-//                if (exitTime.isAfter(LocalTime.of(8, 0))) {
-//                    return overnightPrice * (daysBetween + 1);
-//                }
-//                return overnightPrice * daysBetween;
-//            }
-//
-//            if (exitTime.isAfter(LocalTime.of(8, 0))) {
-//                return overnightPrice * daysBetween;
-//            }
-//
-//            return overnightPrice * (daysBetween - 1);
-//        }
-//
-//        throw new IllegalArgumentException("Entrance date is after exit date");
-//    }
+    // private double overnightCalculator(LocalDate exitDate, LocalTime exitTime) {
+    // if (entranceDate.equals(exitDate)) {
+    // if (entranceTime.isBefore(LocalTime.of(2, 0)) &&
+    // exitTime.isAfter(LocalTime.of(8, 0))) {
+    // return overnightPrice;
+    // }
+    // return 0.0;
+    // }
+    //
+    // if (exitDate.isAfter(entranceDate)) {
+    // double daysBetween = ChronoUnit.DAYS.between(entranceDate, exitDate);
+    //
+    // if (entranceTime.isBefore(LocalTime.of(2, 0))) {
+    // if (exitTime.isAfter(LocalTime.of(8, 0))) {
+    // return overnightPrice * (daysBetween + 1);
+    // }
+    // return overnightPrice * daysBetween;
+    // }
+    //
+    // if (exitTime.isAfter(LocalTime.of(8, 0))) {
+    // return overnightPrice * daysBetween;
+    // }
+    //
+    // return overnightPrice * (daysBetween - 1);
+    // }
+    //
+    // throw new IllegalArgumentException("Entrance date is after exit date");
+    // }
 
     private double overnightCalculator(LocalDate exitDate, LocalTime exitTime) {
         if (entranceDate.equals(exitDate)) {
@@ -122,12 +124,13 @@ public class ParkingSys {
 
             if (entranceTime.isBefore(LocalTime.of(2, 0))) {
                 if (exitTime.isAfter(LocalTime.of(8, 0))) {
-                    return overnightPrice * (daysBetween  );
+                    return overnightPrice * (daysBetween);
                 }
             }
             if (exitTime.isAfter(LocalTime.of(8, 0))) {
                 return overnightPrice * (daysBetween);
             }
+            return overnightPrice * (daysBetween - 1);
         }
         if (exitDate.isAfter(entranceDate)) {
             return 0;
@@ -136,11 +139,11 @@ public class ParkingSys {
         throw new IllegalArgumentException("Entrance date is after exit date");
     }
 
-        public void verifyRange(LocalTime time) {
-            if (time.isAfter(LocalTime.of(2, 0)) && time.isBefore(LocalTime.of(8, 0))) {
-                throw new IllegalArgumentException("O estacionamento está fechado neste horário");
-            }
+    public void verifyRange(LocalTime time) {
+        if (time.isAfter(LocalTime.of(2, 0)) && time.isBefore(LocalTime.of(8, 0))) {
+            throw new IllegalArgumentException("O estacionamento está fechado neste horário");
         }
+    }
 
     private double applyVipDiscount(double valor) {
         return isVip ? valor * 0.5 : valor;

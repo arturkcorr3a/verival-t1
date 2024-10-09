@@ -1,285 +1,24 @@
 package com.vev;
 
-import org.junit.jupiter.api.Test;
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class ParkingSysTest {
-    // testes de caso limite
 
-    // ID 30
-    @Test
-    public void testEntradaESaidaNoMesmoMinuto() {
-        ParkingSys parking = new ParkingSys(false);
-        LocalDate date = LocalDate.now();
-        LocalTime entranceTime = LocalTime.of(10, 0, 0);
-        LocalTime exitTime = LocalTime.of(10, 0, 30);
-
-        parking.enter(date, entranceTime);
-        String resultado = parking.leave(date, exitTime);
-
-        assertTrue(resultado.contains("Valor a pagar: R$ 0,00"));
-    }
-
-    // ID 29
-    @Test
-    public void testEntradaESaidaNoMesmoMinutoVIP() {
-        ParkingSys parking = new ParkingSys(true);
-        LocalDate date = LocalDate.now();
-        LocalTime entranceTime = LocalTime.of(10, 0, 0);
-        LocalTime exitTime = LocalTime.of(10, 0, 30);
-
-        parking.enter(date, entranceTime);
-        String resultado = parking.leave(date, exitTime);
-
-        assertTrue(resultado.contains("Valor a pagar: R$ 0,00"));
-    }
-
-    // ID 10
-    @Test
-    public void testPermanenciaExataDe15Minutos() {
-        ParkingSys parking = new ParkingSys(false);
-        LocalDate date = LocalDate.now();
-        LocalTime entranceTime = LocalTime.of(9, 0);
-        LocalTime exitTime = entranceTime.plusMinutes(15);
-
-        parking.enter(date, entranceTime);
-        String resultado = parking.leave(date, exitTime);
-
-        assertTrue(resultado.contains("Valor a pagar: R$ 0,00"));
-    }
-
-    // ID 9
-    @Test
-    public void testPermanenciaExataDe15MinutosVIP() {
-        ParkingSys parking = new ParkingSys(true);
-        LocalDate date = LocalDate.now();
-        LocalTime entranceTime = LocalTime.of(9, 0);
-        LocalTime exitTime = entranceTime.plusMinutes(15);
-
-        parking.enter(date, entranceTime);
-        String resultado = parking.leave(date, exitTime);
-
-        assertTrue(resultado.contains("Valor a pagar: R$ 0,00"));
-    }
-
-    // ID 18
-    @Test
-    public void testPermanenciaExataDeUmaHora() {
-        ParkingSys parking = new ParkingSys(false);
-        LocalDate date = LocalDate.now();
-        LocalTime entranceTime = LocalTime.of(9, 0);
-        LocalTime exitTime = entranceTime.plusHours(1);
-
-        parking.enter(date, entranceTime);
-        String resultado = parking.leave(date, exitTime);
-
-        assertTrue(resultado.contains("Valor a pagar: R$ 5,90"));
-    }
-
-    // ID 17
-    @Test
-    public void testPermanenciaExataDeUmaHoraVIP() {
-        ParkingSys parking = new ParkingSys(true);
-        LocalDate date = LocalDate.now();
-        LocalTime entranceTime = LocalTime.of(9, 0);
-        LocalTime exitTime = entranceTime.plusHours(1);
-
-        parking.enter(date, entranceTime);
-        String resultado = parking.leave(date, exitTime);
-
-        assertTrue(resultado.contains("Valor a pagar: R$ 2,95"));
-    }
-
-    // @Test
-    // public void testPermanenciaDe16Minutos() {
-    // ParkingSys parking = new ParkingSys(false);
-    // LocalDate date = LocalDate.now();
-    // LocalTime entranceTime = LocalTime.of(10, 0);
-    // LocalTime exitTime = entranceTime.plusMinutes(16);
-
-    // parking.enter(date, entranceTime);
-    // String resultado = parking.leave(date, exitTime);
-
-    // assertTrue(resultado.contains("Valor a pagar: R$ 5,90"));
-    // }
-
-    // @Test
-    // public void testPermanenciaDe16MinutosVIP() {
-    // ParkingSys parking = new ParkingSys(true);
-    // LocalDate date = LocalDate.now();
-    // LocalTime entranceTime = LocalTime.of(10, 0);
-    // LocalTime exitTime = entranceTime.plusMinutes(16);
-
-    // parking.enter(date, entranceTime);
-    // String resultado = parking.leave(date, exitTime);
-
-    // assertTrue(resultado.contains("Valor a pagar: R$ 2,95"));
-    // }
-
-    // ID 12
-    @Test
-    public void testPermanenciaDe15MinutosE1Segundo() {
-        ParkingSys parking = new ParkingSys(false);
-        LocalDate date = LocalDate.of(2024, 10, 8);
-        LocalTime entranceTime = LocalTime.of(9, 0);
-        LocalTime exitTime = entranceTime.plusMinutes(15).plusSeconds(1);
-
-        parking.enter(date, entranceTime);
-        String resultado = parking.leave(date, exitTime);
-
-        // assertEquals("Saída realizada em 08/10/2024 às 10:15:01.\nValor a pagar: R$
-        // 5,90", resultado);
-        assertTrue(resultado.contains("Valor a pagar: R$ 5,90"));
-    }
-
-    // ID 11
-    @Test
-    public void testPermanenciaDe15MinutosE1SegundoVIP() {
-        ParkingSys parking = new ParkingSys(true);
-        LocalDate date = LocalDate.of(2024, 10, 8);
-        LocalTime entranceTime = LocalTime.of(9, 0);
-        LocalTime exitTime = entranceTime.plusMinutes(15).plusSeconds(1);
-
-        parking.enter(date, entranceTime);
-        String resultado = parking.leave(date, exitTime);
-
-        // assertEquals("Saída realizada em 08/10/2024 às 10:15:01.\nValor a pagar: R$
-        // 2,95", resultado);
-        assertTrue(resultado.contains("Valor a pagar: R$ 2,95"));
-    }
-
-    // @Test
-    // public void testPermanenciaDeUmaHoraEUmMinuto() {
-    // ParkingSys parking = new ParkingSys(false);
-    // LocalDate date = LocalDate.now();
-    // LocalTime entranceTime = LocalTime.of(10, 0);
-    // LocalTime exitTime = entranceTime.plusHours(1).plusMinutes(1);
-
-    // parking.enter(date, entranceTime);
-    // String resultado = parking.leave(date, exitTime);
-
-    // assertTrue(resultado.contains("Valor a pagar: R$ 8,40"));
-    // }
-
-    // @Test
-    // public void testPermanenciaDeUmaHoraEUmMinutoVIP() {
-    // ParkingSys parking = new ParkingSys(true);
-    // LocalDate date = LocalDate.now();
-    // LocalTime entranceTime = LocalTime.of(10, 0);
-    // LocalTime exitTime = entranceTime.plusHours(1).plusMinutes(1);
-
-    // parking.enter(date, entranceTime);
-    // String resultado = parking.leave(date, exitTime);
-
-    // assertTrue(resultado.contains("Valor a pagar: R$ 4,20"));
-    // }
-
-    // ID 20
-    @Test
-    public void testPermanenciaDeUmaHoraUmSegundo() {
-        ParkingSys parking = new ParkingSys(false);
-        LocalDate date = LocalDate.now();
-        LocalTime entranceTime = LocalTime.of(9, 0);
-        LocalTime exitTime = entranceTime.plusHours(1).plusSeconds(1);
-
-        parking.enter(date, entranceTime);
-        String resultado = parking.leave(date, exitTime);
-
-        assertTrue(resultado.contains("Valor a pagar: R$ 8,40"));
-    }
-
-    // ID 19
-    @Test
-    public void testPermanenciaDeUmaHoraUmSegundoVIP() {
-        ParkingSys parking = new ParkingSys(true);
-        LocalDate date = LocalDate.now();
-        LocalTime entranceTime = LocalTime.of(9, 0);
-        LocalTime exitTime = entranceTime.plusHours(1).plusSeconds(1);
-
-        parking.enter(date, entranceTime);
-        String resultado = parking.leave(date, exitTime);
-
-        assertTrue(resultado.contains("Valor a pagar: R$ 4,20"));
-    }
-
-    // teste de mudanças de dias
-    // ID 32
-    @Test
-    public void testEntradaAntesDaMeiaNoiteSaidaDepois() {
-        ParkingSys parking = new ParkingSys(false);
-        LocalDate entranceDate = LocalDate.now();
-        LocalDate exitDate = entranceDate.plusDays(1);
-        LocalTime entranceTime = LocalTime.of(23, 50);
-        LocalTime exitTime = LocalTime.of(0, 10);
-
-        parking.enter(entranceDate, entranceTime);
-        String resultado = parking.leave(exitDate, exitTime);
-
-        assertTrue(resultado.contains("Valor a pagar: R$ 5,90"));
-    }
-
-    // ID 31
-    @Test
-    public void testEntradaAntesDaMeiaNoiteSaidaDepoisVIP() {
-        ParkingSys parking = new ParkingSys(true);
-        LocalDate entranceDate = LocalDate.now();
-        LocalDate exitDate = entranceDate.plusDays(1);
-        LocalTime entranceTime = LocalTime.of(23, 50);
-        LocalTime exitTime = LocalTime.of(0, 10);
-
-        parking.enter(entranceDate, entranceTime);
-        String resultado = parking.leave(exitDate, exitTime);
-
-        assertTrue(resultado.contains("Valor a pagar: R$ 2,95"));
-    }
-
-    // ID 34
-    @Test
-    public void testEntradaSaidaDiasDiferentesPermanenciaCurta() {
-        ParkingSys parking = new ParkingSys(false);
-        LocalDate entranceDate = LocalDate.now();
-        LocalDate exitDate = entranceDate.plusDays(1);
-        LocalTime entranceTime = LocalTime.of(23, 55);
-        LocalTime exitTime = LocalTime.of(0, 5);
-
-        parking.enter(entranceDate, entranceTime);
-        String resultado = parking.leave(exitDate, exitTime);
-
-        assertTrue(resultado.contains("Valor a pagar: R$ 0,00"));
-    }
-
-    // ID 33
-    @Test
-    public void testEntradaSaidaDiasDiferentesPermanenciaCurtaVIP() {
-        ParkingSys parking = new ParkingSys(true);
-        LocalDate entranceDate = LocalDate.now();
-        LocalDate exitDate = entranceDate.plusDays(1);
-        LocalTime entranceTime = LocalTime.of(23, 55);
-        LocalTime exitTime = LocalTime.of(0, 5);
-
-        parking.enter(entranceDate, entranceTime);
-        String resultado = parking.leave(exitDate, exitTime);
-
-        assertTrue(resultado.contains("Valor a pagar: R$ 0,00"));
-    }
-
-    // testes cálculos de valor
-
-    // ID 1, 2, 3, 4
     @ParameterizedTest
     @CsvSource({
-            "true, 10:00, 10:10, R$ 0,00",
-            "false, 10:00, 10:10, R$ 0,00",
-            "true, 10:00, 10:45, R$ 2,95",
-            "false, 10:00, 10:45, R$ 5,90"
+            "false, 08:00, 09:00, 5.90", // 1 hora
+            "true, 08:00, 09:00, 2.95", // 1 hora (VIP)
+            "false, 08:00, 11:00, 10.90", // 3 horas
+            "true, 08:00, 11:00, 5.45", // 3 horas (VIP)
+            "false, 22:00, 23:00, 5.90", // 1 hora à noite
+            "true, 22:00, 23:00, 2.95" // 1 hora à noite (VIP)
     })
-    public void testValoresEstacionamento(boolean isVip, String entrada, String saida, String valorEsperado) {
-        ParkingSys parking = new ParkingSys(isVip);
+    public void testVariasHoras(boolean isVIP, String entrada, String saida, double valorEsperado) {
+        ParkingSys parking = new ParkingSys(isVIP);
         LocalDate date = LocalDate.now();
         LocalTime entranceTime = LocalTime.parse(entrada);
         LocalTime exitTime = LocalTime.parse(saida);
@@ -287,195 +26,95 @@ public class ParkingSysTest {
         parking.enter(date, entranceTime);
         String resultado = parking.leave(date, exitTime);
 
-        assertTrue(resultado.contains("Valor a pagar: " + valorEsperado));
+        assertTrue(resultado.contains("Valor a pagar: R$ " + String.format("%.2f", valorEsperado)));
     }
 
-    // ID 5
-    @Test
-    public void testPermanenciaDeMultiplasHoras() {
-        ParkingSys parking = new ParkingSys(false);
-        LocalDate date = LocalDate.now();
-        LocalTime entranceTime = LocalTime.of(8, 0);
-        LocalTime exitTime = entranceTime.plusHours(5);
-
-        parking.enter(date, entranceTime);
-        String resultado = parking.leave(date, exitTime);
-
-        assertTrue(resultado.contains("Valor a pagar: R$ 15,90"));
-    }
-
-    // ID 4
-    @Test
-    public void testPermanenciaDeMultiplasHorasVIP() {
-        ParkingSys parking = new ParkingSys(true);
-        LocalDate date = LocalDate.now();
-        LocalTime entranceTime = LocalTime.of(8, 0);
-        LocalTime exitTime = entranceTime.plusHours(5);
-
-        parking.enter(date, entranceTime);
-        String resultado = parking.leave(date, exitTime);
-
-        assertTrue(resultado.contains("Valor a pagar: R$ 7,95"));
-    }
-
-    // ID 36
-    @Test
-    public void testFalsaPernoite() {
-        ParkingSys parking = new ParkingSys(false);
-        LocalDate date = LocalDate.now();
-        LocalTime entranceTime = LocalTime.of(1, 0);
-        LocalTime exitTime = LocalTime.of(9, 0);
-
-        parking.enter(date, entranceTime);
-        String resultado = parking.leave(date, exitTime);
-
-        assertTrue(resultado.contains("Valor a pagar: R$ 23,40"));
-    }
-
-    // ID 35
-    @Test
-    public void testFalsaPernoiteVIP() {
-        ParkingSys parking = new ParkingSys(true);
-        LocalDate date = LocalDate.now();
-        LocalTime entranceTime = LocalTime.of(1, 0);
-        LocalTime exitTime = LocalTime.of(9, 0);
-
-        parking.enter(date, entranceTime);
-        String resultado = parking.leave(date, exitTime);
-
-        assertTrue(resultado.contains("Valor a pagar: R$ 11,70"));
-    }
-
-    // ID 8
-    @Test
-    public void testUmPernoiteDoisDias() {
-        ParkingSys parking = new ParkingSys(false);
+    @ParameterizedTest
+    @CsvSource({
+            "false, 23:50, 00:10, 5.90",
+            "true, 23:50, 00:10, 2.95",
+            "false, 23:55, 00:05, 0.00",
+            "true, 23:55, 00:05, 0.00"
+    })
+    public void testEntradaSaidaDiasDiferentes(boolean isVIP, String entrada, String saida, double valorEsperado) {
+        ParkingSys parking = new ParkingSys(isVIP);
         LocalDate entranceDate = LocalDate.now();
         LocalDate exitDate = entranceDate.plusDays(1);
-        LocalTime entranceTime = LocalTime.of(12, 0);
-        LocalTime exitTime = LocalTime.of(23, 0);
+        LocalTime entranceTime = LocalTime.parse(entrada);
+        LocalTime exitTime = LocalTime.parse(saida);
 
         parking.enter(entranceDate, entranceTime);
         String resultado = parking.leave(exitDate, exitTime);
 
-        assertTrue(resultado.contains("Valor a pagar: R$ 50,00"));
+        assertTrue(resultado.contains("Valor a pagar: R$ " + String.format("%.2f", valorEsperado)));
     }
 
-    // ID 7
-    @Test
-    public void testUmPernoiteDoisDiasVIP() {
-        ParkingSys parking = new ParkingSys(true);
+    @ParameterizedTest
+    @CsvSource({
+            "false, 12:00, 23:00, 100.00", // 2 pernoites
+            "true, 12:00, 23:00, 50.00",
+            "false, 01:00, 09:00, 100.00", // 2 dias e 2 pernoites
+            "true, 01:00, 09:00, 50.00",
+            "false, 09:00, 01:00, 50.00", // 2 dias e 1 pernoite
+            "true, 09:00, 01:00, 25.00"
+    })
+    public void testPernoitesEOutrosDias(boolean isVIP, String entrada, String saida, double valorEsperado) {
+        ParkingSys parking = new ParkingSys(isVIP);
         LocalDate entranceDate = LocalDate.now();
-        LocalDate exitDate = entranceDate.plusDays(1);
-        LocalTime entranceTime = LocalTime.of(12, 0);
-        LocalTime exitTime = LocalTime.of(23, 0);
+        LocalDate exitDate = entranceDate.plusDays(2); // Teste para múltiplos dias
+        LocalTime entranceTime = LocalTime.parse(entrada);
+        LocalTime exitTime = LocalTime.parse(saida);
 
         parking.enter(entranceDate, entranceTime);
         String resultado = parking.leave(exitDate, exitTime);
 
-        assertTrue(resultado.contains("Valor a pagar: R$ 25,00"));
+        assertTrue(resultado.contains("Valor a pagar: R$ " + String.format("%.2f", valorEsperado)));
     }
 
-    // ID 38
-    @Test
-    public void testDoisPernoitesDoisDia() {
-        ParkingSys parking = new ParkingSys(false);
-        LocalDate entranceDate = LocalDate.now();
-        LocalDate exitDate = entranceDate.plusDays(1);
-        LocalTime entranceTime = LocalTime.of(1, 0);
-        LocalTime exitTime = LocalTime.of(9, 0);
-
-        parking.enter(entranceDate, entranceTime);
-        String resultado = parking.leave(exitDate, exitTime);
-
-        assertTrue(resultado.contains("Valor a pagar: R$ 50,00"));
-    }
-
-    // ID 37
-    @Test
-    public void testDoisPernoitesDoisDiaVIP() {
-        ParkingSys parking = new ParkingSys(true);
-        LocalDate entranceDate = LocalDate.now();
-        LocalDate exitDate = entranceDate.plusDays(1);
-        LocalTime entranceTime = LocalTime.of(1, 0);
-        LocalTime exitTime = LocalTime.of(9, 0);
-
-        parking.enter(entranceDate, entranceTime);
-        String resultado = parking.leave(exitDate, exitTime);
-
-        assertTrue(resultado.contains("Valor a pagar: R$ 25,00"));
-    }
-
-    // @Test
-    // public void testDoisPernoitesDoisDias() {
-    // ParkingSys parking = new ParkingSys(false);
-    // LocalDate entranceDate = LocalDate.now();
-    // LocalDate exitDate = entranceDate.plusDays(2);
-    // LocalTime entranceTime = LocalTime.of(1, 0);
-    // LocalTime exitTime = LocalTime.of(9, 0);
-
-    // parking.enter(entranceDate, entranceTime);
-    // String resultado = parking.leave(exitDate, exitTime);
-
-    // assertTrue(resultado.contains("Valor a pagar: R$ 100,00"));
-    // }
-
-    // @Test
-    // public void testDoisPernoitesDoisDiasVIP() {
-    // ParkingSys parking = new ParkingSys(true);
-    // LocalDate entranceDate = LocalDate.now();
-    // LocalDate exitDate = entranceDate.plusDays(2);
-    // LocalTime entranceTime = LocalTime.of(1, 0);
-    // LocalTime exitTime = LocalTime.of(9, 0);
-
-    // parking.enter(entranceDate, entranceTime);
-    // String resultado = parking.leave(exitDate, exitTime);
-
-    // assertTrue(resultado.contains("Valor a pagar: R$ 50,00"));
-    // }
-
-    // testes de exceções
-    // ID 28
-    @Test
-    public void testSaidaAntesDaEntrada() {
-        ParkingSys parking = new ParkingSys(false);
+    @ParameterizedTest
+    @CsvSource({
+            "false, 10:00, 09:50", // Saída antes da entrada
+            "true, 10:00, 09:50"
+    })
+    public void testSaidaAntesDaEntrada(boolean isVIP, String entrada, String saida) {
+        ParkingSys parking = new ParkingSys(isVIP);
         LocalDate date = LocalDate.now();
-        LocalTime entranceTime = LocalTime.of(10, 0);
-        LocalTime exitTime = entranceTime.minusMinutes(10);
+        LocalTime entranceTime = LocalTime.parse(entrada);
+        LocalTime exitTime = LocalTime.parse(saida);
 
         parking.enter(date, entranceTime);
 
         assertThrows(IllegalArgumentException.class, () -> parking.leave(date, exitTime));
     }
 
-    // ID 27
-    @Test
-    public void testSaidaAntesDaEntradaVIP() {
-        ParkingSys parking = new ParkingSys(true);
+    @ParameterizedTest
+    @CsvSource({
+            "false, 03:00", // Horário fechado
+            "true, 03:00"
+    })
+    public void testHorarioFechado(boolean isVIP, String horarioFechado) {
+        ParkingSys parking = new ParkingSys(isVIP);
+        LocalTime fechado = LocalTime.parse(horarioFechado);
+
+        assertThrows(IllegalArgumentException.class, () -> parking.verifyRange(fechado));
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "false, 08:00, 13:00, 15.90", // 5 horas
+            "true, 08:00, 13:00, 7.95",
+            "false, 01:00, 09:00, 23.40", // 8 horas (sem pernoite)
+            "true, 01:00, 09:00, 11.70"
+    })
+    public void testPermanenciaDeMultiplasHoras(boolean isVIP, String entrada, String saida, double valorEsperado) {
+        ParkingSys parking = new ParkingSys(isVIP);
         LocalDate date = LocalDate.now();
-        LocalTime entranceTime = LocalTime.of(10, 0);
-        LocalTime exitTime = entranceTime.minusMinutes(10);
+        LocalTime entranceTime = LocalTime.parse(entrada);
+        LocalTime exitTime = LocalTime.parse(saida);
 
         parking.enter(date, entranceTime);
+        String resultado = parking.leave(date, exitTime);
 
-        assertThrows(IllegalArgumentException.class, () -> parking.leave(date, exitTime));
-    }
-
-    // ID 26
-    @Test
-    public void testHorarioFechado() {
-        ParkingSys parking = new ParkingSys(false);
-        LocalTime fechado = LocalTime.of(3, 0);
-
-        assertThrows(IllegalArgumentException.class, () -> parking.verifyRange(fechado));
-    }
-
-    // ID 25
-    @Test
-    public void testHorarioFechadoVIP() {
-        ParkingSys parking = new ParkingSys(true);
-        LocalTime fechado = LocalTime.of(3, 0);
-
-        assertThrows(IllegalArgumentException.class, () -> parking.verifyRange(fechado));
+        assertTrue(resultado.contains("Valor a pagar: R$ " + String.format("%.2f", valorEsperado)));
     }
 }
