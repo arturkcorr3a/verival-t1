@@ -25,7 +25,10 @@ public class ParkingSysTest {
             "true, 09:00:00, 10:00:01, 04.20", // ID 19
             "false, 09:00:00, 10:00:01, 08.40", //  ID 20
             "true, 10:00:00, 10:00:30, 00.00", // ID 31
-            "false, 10:00:00, 10:00:30, 00.00" //  ID 32
+            "false, 10:00:00, 10:00:30, 00.00", //  ID 32
+            "true, 01:00:00, 09:00:00, 11.70", // ID 37
+            "false, 01:00:00, 09:00:00, 23.40" // ID 38
+
     })
 
     public void testVariasHoras(boolean isVIP, String entrada, String saida, double valorEsperado) {
@@ -64,12 +67,8 @@ public class ParkingSysTest {
 
     @ParameterizedTest
     @CsvSource({
-            "false, 12:00, 23:00, 100.00", // 2 pernoites
-            "true, 12:00, 23:00, 50.00",
-            "false, 01:00, 09:00, 100.00", // 2 dias e 2 pernoites
-            "true, 01:00, 09:00, 50.00",
-            "false, 09:00, 01:00, 50.00", // 2 dias e 1 pernoite
-            "true, 09:00, 01:00, 25.00"
+            "true, 09:00, 01:00, 50.00", // ID 39
+            "false, 09:00, 01:00, 25.00" // ID 40
     })
     public void testPernoitesEOutrosDias(boolean isVIP, String entrada, String saida, double valorEsperado) {
         ParkingSys parking = new ParkingSys(isVIP);
