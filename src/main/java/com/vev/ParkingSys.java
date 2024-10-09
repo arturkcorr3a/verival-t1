@@ -132,9 +132,6 @@ public class ParkingSys {
             }
             return overnightPrice * (daysBetween - 1);
         }
-        if (exitDate.isAfter(entranceDate)) {
-            return 0;
-        }
 
         throw new IllegalArgumentException("Entrance date is after exit date");
     }
