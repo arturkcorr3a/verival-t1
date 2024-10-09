@@ -10,13 +10,22 @@ public class ParkingSysTest {
 
     @ParameterizedTest
     @CsvSource({
-            "false, 08:00, 09:00, 5.90", // 1 hora
-            "true, 08:00, 09:00, 2.95", // 1 hora (VIP)
-            "false, 08:00, 11:00, 10.90", // 3 horas
-            "true, 08:00, 11:00, 5.45", // 3 horas (VIP)
-            "false, 22:00, 23:00, 5.90", // 1 hora à noite
-            "true, 22:00, 23:00, 2.95" // 1 hora à noite (VIP)
+            "true, 10:00, 10:10, 00.00", // ID 1
+            "false, 10:00, 10:10, 00.00", // ID 2
+            "true, 10:00, 10:45, 02.95", // ID 3
+            "false, 10:00, 10:45, 05.90", // ID 4
+            "true, 08:00, 13:00, 07.95", // ID 5
+            "false, 08:00, 13:00, 15.90", //  ID 6
+            "true, 09:00:00, 09:15:00, 00.00", // ID 9
+            "false, 09:00:00, 09:15:00, 00.00", // ID 10
+            "true, 09:00:00, 09:15:01, 02.95", // ID 11
+            "false, 09:00:00, 09:15:01, 05.90", //  ID 12
+            "true, 09:00:00, 10:00:00, 02.95", // ID 17
+            "false, 09:00:00, 10:00:00, 05.90", // ID 18
+            "true, 09:00:00, 10:00:01, 04.20", // ID 19
+            "false, 09:00:00, 10:00:01, 08.40" //  ID 20
     })
+
     public void testVariasHoras(boolean isVIP, String entrada, String saida, double valorEsperado) {
         ParkingSys parking = new ParkingSys(isVIP);
         LocalDate date = LocalDate.now();
@@ -31,10 +40,8 @@ public class ParkingSysTest {
 
     @ParameterizedTest
     @CsvSource({
-            "false, 23:50, 00:10, 5.90",
-            "true, 23:50, 00:10, 2.95",
-            "false, 23:55, 00:05, 0.00",
-            "true, 23:55, 00:05, 0.00"
+            "true, 12:00, 23:00, 25.00", // ID 7
+            "false, 12:00, 23:00, 50.00", //  ID 8
     })
     public void testEntradaSaidaDiasDiferentes(boolean isVIP, String entrada, String saida, double valorEsperado) {
         ParkingSys parking = new ParkingSys(isVIP);
@@ -73,18 +80,21 @@ public class ParkingSysTest {
 
     @ParameterizedTest
     @CsvSource({
-            "false, 10:00, 09:50", // Saída antes da entrada
-            "true, 10:00, 09:50"
+            "false, 10:00, 09:50, 0", // Saída antes da entrada (horário)
+            "true, 10:00, 09:50, 0",
+            "false, 10:00, 10:10, 1", // Saída antes da entrada (dia)
+            "true, 10:00, 10:10, 1"
     })
-    public void testSaidaAntesDaEntrada(boolean isVIP, String entrada, String saida) {
+    public void testSaidaAntesDaEntrada(boolean isVIP, String entrada, String saida, int deltaDays) {
         ParkingSys parking = new ParkingSys(isVIP);
-        LocalDate date = LocalDate.now();
+        LocalDate entranceDate = LocalDate.now();
+        LocalDate exitDate = entranceDate.minusDays(deltaDays);
         LocalTime entranceTime = LocalTime.parse(entrada);
         LocalTime exitTime = LocalTime.parse(saida);
 
-        parking.enter(date, entranceTime);
+        parking.enter(entranceDate, entranceTime);
 
-        assertThrows(IllegalArgumentException.class, () -> parking.leave(date, exitTime));
+        assertThrows(IllegalArgumentException.class, () -> parking.leave(exitDate, exitTime));
     }
 
     @ParameterizedTest
@@ -99,22 +109,4 @@ public class ParkingSysTest {
         assertThrows(IllegalArgumentException.class, () -> parking.verifyRange(fechado));
     }
 
-    @ParameterizedTest
-    @CsvSource({
-            "false, 08:00, 13:00, 15.90", // 5 horas
-            "true, 08:00, 13:00, 7.95",
-            "false, 01:00, 09:00, 23.40", // 8 horas (sem pernoite)
-            "true, 01:00, 09:00, 11.70"
-    })
-    public void testPermanenciaDeMultiplasHoras(boolean isVIP, String entrada, String saida, double valorEsperado) {
-        ParkingSys parking = new ParkingSys(isVIP);
-        LocalDate date = LocalDate.now();
-        LocalTime entranceTime = LocalTime.parse(entrada);
-        LocalTime exitTime = LocalTime.parse(saida);
-
-        parking.enter(date, entranceTime);
-        String resultado = parking.leave(date, exitTime);
-
-        assertTrue(resultado.contains("Valor a pagar: R$ " + String.format("%.2f", valorEsperado)));
-    }
 }
